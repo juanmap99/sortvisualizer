@@ -1,0 +1,8 @@
+$sdef$s $dinsertionSort$d(arr):
+    $sfor$s i $sin$s $frange$f(1, $flen$f(arr)):
+        reverser = arr[i]
+        j = i - $u1$u
+        $swhile$s j >= $u0$u $sand$s reverser < arr[j]:
+            arr[j + $u1$u] = arr[j]
+            j -= $u1$u
+        arr[j + $u1$u] = reverser

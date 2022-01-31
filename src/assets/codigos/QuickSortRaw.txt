@@ -1,0 +1,29 @@
+def swap(array,indexA,indexB):
+    temp = array[indexA]
+    array[indexA] = array[indexB]
+    array[indexB] = temp
+
+
+def partition(array,iLow,iHigh):
+    pivote = array[iHigh]
+    iLowerThanPivote = iLow
+    for j in range(iLow,iHigh):
+        if(array[j]<= pivote):
+            swap(array,iLowerThanPivote,j)
+            iLowerThanPivote += 1
+    swap(array,iLowerThanPivote,iHigh)
+    return iLowerThanPivote
+
+
+def quickSort(array):
+    stack = []
+    if len(array) != 0:
+        stack.append([0, len(array)-1])
+    while(len(stack) > 0):
+        indexPair= stack.pop()
+        iPivote = partition(array,indexPair[0],indexPair[1])
+        if(iPivote-1 > indexPair[0]):
+            stack.append([indexPair[0],iPivote-1])
+
+        if(iPivote+1 < indexPair[1]):
+            stack.append([iPivote+1,indexPair[1]])

@@ -1,0 +1,79 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Introducción</h1>
+            <p>El bubble sort es uno de los algoritmos de busqueda que menos complejidad
+               conlleva entender, ya que simplemente recorre el array de manera iterativa, <strong>desplazando</strong> en cada
+               iteración el elemento mas grande hacia el final de la porción de array que le quede ordenar.
+            </p>
+            <br>
+            <h1>Análisis complejidad temporal</h1>
+            <p>La complejidad temporal en el peor de los casos es O(N<sup>2</sup>) ya que
+            se cuentan con tantas iteraciones como elementos tiene el array, y sobre cada iteración
+            se recorre una cantidad de elementos que en promedio asumimos como N</p>
+            <p>Si bien el <strong>"Early stopping"</strong> que se da cuando no surgen desplazamientos en una iteración
+                ayuda a aumentar la rapidez del algoritmo, su complejidad temporal en el peor de los casos
+                no varía, y sigue siendo en promedio un algoritmo muy lento si lo comparamos contra
+                otras alternativas.
+            </p>
+            <br>
+            <h1>Análisis complejidad espacial</h1>
+            <p>La complejidad espacial del Bubble sort es costante ya que como variables auxiliares
+                solo utiliza una variable booleana que nos le permite hacer un "Early stopping" en el
+                caso que sea posible y una variable de caracter temporal que asiste a la hora de realizar 
+                el desplazamiento entre posiciones.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modal-content"
+        [style.height]="modalHeight-90 + 'px'"
+        [style.width]="modalWidth-40 + 'px'">
+        <h1>Procedimiento</h1>
+            <p>
+                El procedimiento a traves del cual funciona el BubbleSort puede ser resumido en los siguientes pasos.
+            </p>
+            <ul>
+                <li>Se comienza un ciclo de iteración que va desde 0 hasta la longitud del array.</li>
+                <ul>
+                    <li>En cada ciclo se define el rango que sera recorrido del array, el cual partira desde la posición 0 y llegará hasta la posición definida por la resta entre
+                        la (longitud del array-1) menos la cantidad de ciclos recorridos. El motivo por el que se resta uno a la
+                        longitud del array es debido a que se compara cada elemento contra el siguiente y no se desea obtener un error
+                        al intentar acceder a una posición que escapa de los limites del array; mientras que la resta por la cantidad de ciclos se
+                        realiza ya que se conoce de manera certera que existen tantos elementos ordenados como ciclos hayan sido realizados, lo que se debe a que en cada ciclo se cuenta con 
+                        la garantia que un nuevo elemento sera desplazado hacia el final y pasara a estar ordenado.
+                    </li>
+                    <li>Previo a recorrer el array en la actual iteración,se inicializa una variable booleana en <strong>false</strong> que determina si en el ciclo actual se realizaron
+                        desplazamientos.
+                    </li>
+                    <li>Se comienza a recorrer el array en la iteración actual. En cada posición, se compara el valor del elemento actual contra el siguiente, y en caso que el primero sea mayor al segundo se invierten sus valores. A su vez, en
+                        caso que haya sido necesario el cambio, se varía el valor de la variable booleana definida en el punto
+                        anterior a <strong>true</strong> indicando que hubo un desplazamiento en el ciclo actual.
+                    </li>
+                </ul>
+                <li>Una vez terminado el ciclo, se corrobora el valor de la variable booleana que determina si hubo desplazamientos.
+                    En caso que la misma sea false, el array ya se encuentra ordenado y se debe parar con la ejecución. En caso contrario,
+                    se debe pasar a la siguiente iteración.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

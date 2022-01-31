@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <h1>Referencia</h1>
+    <div class="reference-container">
+        <div *ngFor="let ref of referenceList" class="ref-el" >
+            <div class="dot" [style.background-color]="ref.refColor"></div>
+            <div class="ref-data">
+                <span class="var-name">{{ref.varName}}</span>
+                <span (click)="setInfoDisplay(ref)"class="descripcion">Descripcion</span>
+            </div>
+            <!--<span class="chip-desc">{{ref.descripcion}}</span>-->
+        </div>
+    </div>
+
+    <div>
+        <hr class="hline" [style.visibility]="hasClicked ? 'visible' : 'hidden'">
+        <div class="desc-wrapper" [style.visibility]="hasClicked ? 'visible' : 'hidden'">
+            <div class="desc-title">
+                <div class="dot" [style.background-color]="elemDisplay.refColor"></div>
+                <span class="var-name">{{elemDisplay.varName}}</span>
+            </div>
+            <span class="desc-dis">{{elemDisplay.descripcion}}</span>
+        </div>
+    </div>
+</div>

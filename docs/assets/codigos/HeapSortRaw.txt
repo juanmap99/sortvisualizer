@@ -1,0 +1,31 @@
+def swap(arr, indexA, indexB):
+    temp = arr[indexA]
+    arr[indexA] = arr[indexB]
+    arr[indexB] = temp
+
+
+def heapify(arr, nodes, i):
+    biggest = i
+    leftChild = (2 * i) + 1
+    rightChild = (2 * i) + 2
+
+    if leftChild < nodes and arr[biggest] < arr[leftChild]:
+        biggest = leftChild
+
+    if rightChild < nodes and arr[biggest] < arr[rightChild]:
+        biggest = rightChild
+
+    if biggest != i:
+        swap(arr, biggest, i)
+        heapify(arr, nodes, biggest)
+
+def heapSort(arr):
+    nodes = len(arr)
+    iUntilHasChild = (nodes // 2) - 1
+
+    for i in range(iUntilHasChild, -1, -1):
+        heapify(arr, nodes, i)
+
+    for leftToOrder in range(nodes - 1, 0, -1):
+        swap(arr, leftToOrder, 0)
+        heapify(arr, leftToOrder, 0)

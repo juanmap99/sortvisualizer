@@ -1,0 +1,70 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Introducción</h1>
+            <p>SelectionSort es un algoritmo que ordena el array de forma in-place a traves de un proceso en el cual
+                recorre el array y sobre cada iteración busca el elemento mas pequeño sobre el tramo de array restante para
+                colocarlo en la posición marcada por la iteración actual. Debido a la manera que opera y la no existencia de un mecanismo
+                de <strong>Early stopping</strong> como sucedía en el caso de BubbleSort, es uno de los algoritmos
+                de ordenamiento mas lentos.
+            </p>
+            <br>
+            <h1>Análisis complejidad temporal</h1>
+            <p>
+                La complejidad temporal es de <strong>O(n<sup>2</sup>)</strong> debido a que se recorre la totalidad
+                del array;lo que conlleva un tiempo de O(n); y sobre cada iteración se recorren todos los elementos
+                en posiciones mayores a la actual lo que conlleva un tiempo promedio de O(n).
+            </p>
+            <br>
+            <h1>Análisis complejidad espacial</h1>
+            <p>
+                La complejidad espacial es constante debido a que solo se utiliza una variable auxiliar
+                que guarda el valor del elemento mas pequeño en el tramo de array sobre el cual se esta
+                iterando actualmente.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+             <h1>Procedimiento</h1>
+             <p>
+                El procedimiento es muy sencillo y puede ser resumido en los siguientes pasos:
+            </p>
+            <ul>
+                <li>Se define un índice(<strong>iActual</strong>) que recorre el array desde la posición 0 hasta
+                    el valor marcado por la longitud del array.</li>
+                <li>Sobre cada iteración, se define una variable <strong>min_idx</strong> que contiene el índice donde se encuentre el valor mas pequeño
+                    en el tramo restante. En su inicialización toma el valor de iActual.</li>
+                <li>Se define un índice(<strong>J</strong>) que recorre el array desde la posición iActual+1
+                    hasta el valor marcado por la longitud del array.
+                </li>
+                <li>En cada paso, se compara el valor de array[J] contra el valor de array[min_idx], en caso que el primero
+                    sea menor al segundo, min_idx pasa a ser igual a J.
+                </li>
+                <li>Una vez que se salga del ciclo, siempre y cuando min_idx sea diferente a iActual, se <strong>swapea</strong>
+                    el elemento en la posición iActual con el de min_idx.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>
+

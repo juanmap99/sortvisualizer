@@ -1,0 +1,128 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Introducción</h1>
+            <p>
+                Quick Sort, séase en su versión iterativa o recursiva, funciona bajo la noción de que
+                dividir es conquistar.
+            </p>
+            <p>
+                Existen muchas maneras de implementarlo en donde la caracteristica
+                principal que variará sera el elemento elegido como pivote durante el proceso de particionamiento
+                , teniendo como opciones posibles:
+            </p>
+            <ul>
+                <li>El primer elemento se elige siempre como pivote.</li>
+                <li>El último elemento se elige siempre como pivote.</li>
+                <li>Un elemento al azar se elige siempre como pivote.</li>
+                <li>La median se elige siempre como pivote.</li>
+            </ul>
+            <p>
+                Segun el método que se eliga el contexto ante el cual se genera una 
+                complejidad temporal de <strong>O(N<sup>2</sup>)</strong>, conocida como "Worst case scenario", variará.
+                Si bien ese es el caso, existen medidas que pueden ser tomadas para contrarrestar este comportamiento y garantizar
+                que incluso ante el peor de los casos la complejidad temporal se mantenga como promedio en<strong>O(nLog<sub>2</sub>n)</strong>. 
+            </p>
+            <p>
+                Debido a que el objetivo actual consiste en simplemente explicar una versión básica del 
+                QuickSort para conocer como opera, el metodo elegido fue "El último elemento se elige siempre como pivote.". 
+            </p>
+            <p>
+                Bajo este metodo, el "Worst case scenario" se genera en el momento en donde el array a ordenar
+                se encuentra ordenado ya sea incremental o decrementalmente.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 2">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Procedimiento</h1>
+            <p>
+                El procedimiento a través del cual funciona el QuickSort puede ser resumido en los siguientes pasos.
+            </p>
+            <ul>
+                <li>Se determina un índice de comienzo<strong>(iLow)</strong> y un índice de final<strong>(iHigh)</strong>.En el comienzo los mismos se
+                    definen de manera tal que iLow=0 y iHigh=longitud del array - 1.
+                </li>
+                <li>Se realiza el particionamiento sobre el rango definido. El mismo cuenta con el objetivo de colocar al pivote
+                    en la posición en la que se encontraría en el array ordenado colocando todo elemento con un valor menor
+                    al mismo a la izquierda, y aquellos con un valor mayor a su derecha. Para ello:
+                </li>
+                    <ul>
+                        <li>Se elige un elemento que actuara como <strong>pivote</strong> en la partición.</li>
+                        <li>Se define un índice<strong>(iLowerThanPivote)</strong> que sirva para identificar a partir de que posición
+                            los elementos previos son menores al valor del pivote. En su inicialización el valor que toma
+                            es iLow ya que se arranca con la asunción de que existe la posibilidad de que no haya elemento
+                            con un valor menor a nuestro pivote en el rango establecido.
+                        </li>
+                        <li>Se recorre el array sobre el rango definido por <strong>iLow-iHigh</strong>.En cada posición, se compara el valor del elemento contra el pivote.
+                            En caso de que sea mayor, se pasa a la siguiente posición. 
+                            En caso de que sea menor o igual, se <strong>swapea</strong> dicho elemento por el elemento
+                            que se encuentre en la posición marcada por iLowerThanPivote y se ve aumentado
+                            el valor de este último en 1. 
+                        </li>
+                        <li>
+                            Una vez terminado el recorrido, se <strong>swapea</strong> la posición actual de <strong>iLowerThanPivote</strong>
+                            por la del <strong>pivote</strong> y se retorna dicha posición.
+                        </li>
+                    </ul>
+                <li>Si la cantidad de elementos que existen entre iLow y iPivote(no inclusive) es mayor a uno,
+                    se realiza un particionamiento sobre ese lado manteniendo el valor de iLow pero tomando como <strong>iHigh=iPivote-1</strong>
+                </li>
+                <li>Si la cantidad de elementos que existen entre iPivote(no inclusive) y iHigh es mayor a uno,
+                    se realiza un particionamiento sobre ese lado manteniendo el valor de iHigh pero tomando como <strong>iLow=iPivote+1</strong>
+                </li>
+                <li>Se repite el proceso hasta que ya no haya mas particiones por hacer.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modal-content"
+        [style.height]="modalHeight-90 + 'px'"
+        [style.width]="modalWidth-40 + 'px'">
+            <h1>Análisis complejidad temporal</h1>
+            <p>Como mencionamos en el apartado anterior, la complejidad temporal promedio del QuickSort 
+                es de <strong>O(nLog<sub>2</sub>n)</strong>. ¿Pero qué significa esto?</p>
+            <p>En resumidas cuentas, implica que en promedio la cantidad de 
+               veces que cada elemento del array sera recorrido estará dado por el resultado de <strong>Log<sub>2</sub>(n)</strong></p>
+            <p>¿Por qué logaritmo de N? Basicamente, debido a que en cada partición dividimos a nuestro array en
+                dos mitades, las cuales en el caso ideal son del mismo tamaño. Esto implica 
+                que la profundidad de nuestro arbol que representa las particiones escala de manera lineal a medida
+                que N crece de manera exponencial.
+            </p>
+            <p>Si lo pensamos de una manera mas practica, suponiendo el caso en donde tenemos un array en donde <strong>n=100</strong> 
+               , si adheriesemos un contador a cada elemento que se viera incrementado en 1 cada vez que recorremos el mismo
+               en una partición y una vez que el QuickSort termine su ejecución hiciesemos una suma que incluya el contador
+               adherido a cada indice, el resultado en promedio sera igual a <strong>100Log<sub>2</sub>(100)</strong>.
+            </p>
+            <h1>Análisis complejidad espacial</h1>
+            <p> La complejidad espacial del quick sort, tomando como base el peor de los casos, variará dependiendo de si la implementación se realizó de manera
+                recursiva o iterativa debido a la manera en que se utiliza el <strong>recursion stack</strong> cuando se aplica recursividad.
+            </p>
+            <p>
+                En resumidas cuentas, la complejidad espacial en el peor de los casos en su versión recursiva es de O(N),
+                mientras que en su versión iterativa sera de O(Log<sub>2</sub>N).
+            </p>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 2 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

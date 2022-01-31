@@ -1,0 +1,29 @@
+$sdef$s $dswap$d(array$s,$sindexA$s,$sindexB):
+    temp = array[indexA]
+    array[indexA] = array[indexB]
+    array[indexB] = temp
+$d $d
+$sdef$s $dpartition$d(array$s,$siLow$s,$siHigh):
+    pivote = array[iHigh]
+    iLowerThanPivote = iLow
+    $sfor$s j $sin$s $frange$f(iLow$s,$siHigh):
+        $sif$s(array[j]<= pivote):
+            swap(array$s,$siLowerThanPivote$s,$sj)
+            iLowerThanPivote += $u1$u
+    swap(array$s,$siLowerThanPivote$s,$siHigh)
+    $sreturn$s iLowerThanPivote
+$d $d
+$sdef$s $dquickSort$d(array):
+    stack = []
+    $sif$s($flen$f(array) != $u0$u):
+        stack.append([$u0$u$s,$s $flen$f(array)-$u1$u])
+    $swhile$s($flen$f(stack) > $u0$u):
+        indexPair = stack.pop()
+        iPivote = partition(array$s,$sindexPair[$u0$u]$s,$sindexPair[$u1$u])
+        $sif$s(iPivote-$u1$u > indexPair[$u0$u]):
+            stack.append([indexPair[$u0$u]$s,$siPivote-$u1$u])
+        $d $d
+        $sif$s(iPivote+$u1$u < indexPair[$u1$u]):
+            stack.append([iPivote+$u1$u$s,$sindexPair[$u1$u]])
+
+

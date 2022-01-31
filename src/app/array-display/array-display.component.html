@@ -1,0 +1,12 @@
+<div #arrCont [style.height]="containerHeight" [style.max-width]="containerWidth" class="array-display-cont">
+    <div *ngFor="let elem of array; let indexEl=index;"    
+    [style.height]="calculateElemHeight(elem[1]) + 'px'"
+    [style.width]="elWidth + 'px'"
+    [style.order]="elem[0]"
+    [style.background-color]="calculateBackgroundColor(colors[indexEl])"
+    [style.background-image]="calculateBackgroundImage(colors[indexEl])"
+    class="array-elem">
+    <span [style.fontSize]="fontSize + 'px'" 
+    class="value">{{elem[1]}}</span>
+    </div>
+</div>

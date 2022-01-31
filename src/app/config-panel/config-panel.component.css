@@ -1,0 +1,249 @@
+.conf-body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    height: 100%;
+}
+
+
+.modo-uso-gp{
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0;
+}
+
+@keyframes color-shift {
+    from {border-color: #A4E8E0; color:#A4E8E0;}
+    to {border-color: #F8EA8C; 
+        color:#F8EA8C;
+        font-size: 20px;
+        box-shadow:0.5px 1.2px 3px #E1C340;}
+}
+
+@keyframes righ-shift{
+    0%   {padding-left:3px;}
+    100%  {padding-left:8px;}
+}
+
+.botton-wrapper{
+    font-size: 18px;
+    width: 130px;
+    height: 50px;
+    border-color: #A4E8E0;
+    border-style:solid;
+    border-width:2px;
+    border-radius: 0.82px;
+    color:#A4E8E0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */   
+}
+.botton-wrapper:hover{
+    height: 50px;
+    border-color: #A4E8E0;
+    animation-name: color-shift;
+    animation-duration: 0.09s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+.icon{
+    font-size: 20px;
+    padding-left:3px;
+}
+.botton-wrapper:hover .icon{
+    animation-name: righ-shift;
+    animation-duration: 0.09s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+
+.view-wrapper{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex:2 ;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.explicacion-wrapper{
+    margin-right: 20px;
+}
+
+.param-container{
+    color:#A4E8E0;
+}
+
+
+@keyframes run-shift {
+    from {background-color: #A77CE4; color:#FEF7FF;}
+    to {border-color:#FF7A18; 
+        background-color: transparent;
+        color:#FF7A18;
+        width: 153px;
+        font-size: 21px;
+        box-shadow:0.4px 0.6px 3px #D1E9F1;}
+}
+
+
+
+
+.run-container-wrapper{
+    align-self: center;
+}
+
+.run-wrapper{
+    font-size: 18px;
+    width: 150px;
+    height: 50px;
+    border-color: #A77CE4;
+    background-color: #A77CE4;
+    border-style:solid;
+    border-width:1px;
+    border-radius: 6px;
+    color:#FEF7FF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */  
+}
+
+.run-wrapper-disabled{
+    font-size: 18px;
+    width: 150px;
+    height: 50px;
+    border-color: grey;
+    background-color: transparent;
+    border-style:solid;
+    border-width:1px;
+    border-radius: 6px;
+    color:grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */  
+}
+
+
+
+.run-wrapper:hover{
+    animation-name: run-shift;
+    animation-duration: 0.09s;
+    animation-fill-mode: forwards;
+    animation-timing-function:ease-in;
+}
+
+::ng-deep .mat-slide .mat-slider-thumb {
+    background-color: #A77CE4 !important;
+}
+
+::ng-deep .mat-slide .mat-slider-track-fill {
+    background-color: #A77CE4 !important;
+}
+
+::ng-deep .mat-slide .mat-slider-thumb-label {
+    background-color: #A77CE4 !important;
+}
+
+.use-mode-conf{
+    color:#FEF7FF;
+    margin-left: 15px;
+}
+
+.use-mode-conf label{
+    font-size: 18px;
+}
+
+.use-mode-conf h2{
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.solid{
+    margin-top: 20px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+}
+
+.param-container{
+    color:#FEF7FF;
+    margin-left: 15px;
+}
+
+.param-container h2{
+    font-size: 25px;
+}
+
+.param-container label{
+    font-size: 18px;
+}
+
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:#A77CE4 !important; 
+}
+  
+::ng-deep  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color:#A77CE4 !important;
+    background-color:#A77CE4 !important ;
+}
+
+::ng-deep  .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color:#FEF7FF !important;
+    width: 0px !important;
+    height: 0px !important;
+}
+
+.modo{
+    font-size: 18px !important;
+}
+
+
+.disabledLabel{
+    color: grey;
+}
+.undisabledLabel{
+    color:#FEF7FF;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #A77CE4!important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #A77CE4;
+}
+
+::ng-deep .mat-checkbox-frame{
+    border-color:#A77CE4;
+}
+
+.checkbox-wr span{
+    font-size: 18px;
+}
+
+.undisabledCheckbox{
+    color: grey;
+    font-size: 15px;
+}

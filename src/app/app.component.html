@@ -1,0 +1,104 @@
+<div class="page-container" [style.min-width]="'1270px'" >
+  <div [style.min-width]="'1270px'" class="toolbar modal-overlay">
+    <div [ngClass]="algoritmoElegido=='QuickSort' ? 'tb-item-sel' : 'tb-item-def'" 
+        (click)="setCurrentSortAlg('QuickSort')">
+      <span>QuickSort</span>
+    </div>
+    <div [ngClass]="algoritmoElegido=='BubbleSort' ? 'tb-item-sel' : 'tb-item-def'" 
+        (click)="setCurrentSortAlg('BubbleSort')">
+      <span>BubbleSort</span>
+    </div>
+    <div [ngClass]="algoritmoElegido=='HeapSort' ? 'tb-item-sel' : 'tb-item-def'" 
+        (click)="setCurrentSortAlg('HeapSort')">
+      <span>HeapSort</span>
+    </div>
+    <div [ngClass]="algoritmoElegido=='MergeSort' ? 'tb-item-sel' : 'tb-item-def'" 
+        (click)="setCurrentSortAlg('MergeSort')">
+      <span>MergeSort</span>
+    </div>
+    <div [ngClass]="algoritmoElegido=='SelectionSort' ? 'tb-item-sel' : 'tb-item-def'" 
+        (click)="setCurrentSortAlg('SelectionSort')">
+      <span>SelectionSort</span>
+    </div>
+    <div [ngClass]="algoritmoElegido=='InsertionSort' ? 'tb-item-sel' : 'tb-item-def'" 
+        (click)="setCurrentSortAlg('InsertionSort')">
+      <span>InsertionSort</span>
+    </div>
+  </div>
+  <div class="modal-container" [style.width]="modalWidth+'px'" 
+                              [style.height]="modalHeight+'px'"
+                              [style.margin-top]="(scHeight -modalHeight)/2+'px'"
+                              [style.margin-bottom]="(scHeight -modalHeight)/2+'px'"
+                              [style.margin-left]="(scWidth -modalWidth)/2+'px'"
+                              [style.margin-right]="(scWidth -modalWidth)/2+'px'"
+                              [style.display]="openModal ? 'block' : 'none'"
+                              >
+    <div #modalContainer></div>
+  </div>
+  <div class="modal-background" 
+       [style.min-width]="'1270px'"
+       [style.width]="scWidth+'px'" 
+       [style.height]="scHeight+'px'"
+       [style.display]="openModal ? 'block' : 'none'"
+       (click)="closeModal()">
+  </div>
+  <div class="body-container modal-overlay" [style.min-width]="'1270px'" [style.height]="getBodyHeight()+'px'">
+    <app-reference-bar class="reference-container"></app-reference-bar>
+
+    <div class="array-section-container">
+      <app-array-display class="array-container"></app-array-display> 
+      <div class="aux-displ-section" [style.display]="running ? 'block' : 'none'">
+        <h2 *ngIf="auxVariableExist" class="var-name">Variables auxiliares</h2>
+        <div class="aux-container" *ngFor="let auxVar of auxVarList;">
+          <span class="var-name">{{auxVar.varName}} : </span>
+          <div class="aux-var" 
+               [style.display]="auxVar.displayStatus.leftHiding ? 'flex' : 'none'">
+            <fa-icon class="icon" [icon]="threeDots"></fa-icon>
+          </div>
+          <div class="aux-var" 
+              *ngFor="let value of auxVar.data.slice(auxVar.displayStatus.iStart,auxVar.displayStatus.iEnd)
+                      ;let iEle=index;" 
+          [style.width]="defineAuxVarWidth(value) + 'px'"
+          [style.background-color]="getAuxVarBC(auxVar.colorList, auxVar.displayStatus.iStart,iEle)">
+            <span>{{defineAuxText(value)}}</span>
+          </div>
+          <div class="aux-var" 
+               [style.display]="auxVar.displayStatus.rightHiding ? 'flex' : 'none'">
+            <fa-icon class="icon" [icon]="threeDots"></fa-icon>
+          </div>
+          <span class="var-name"
+                [style.visibility]="auxVar.dataSize == 0 ? 'visible' : 'hidden'">
+                [ ]
+          </span>
+        </div>
+      </div>
+      <div class="program-controller-section">
+        <div class="controller-buttons-section">
+          <div class="next-step-container-wrapper"
+                (click)="modoManualDisabled ? '' : doNextStep()">
+            <div [style.visibility]="(running && modoManualOn) ? 'visible' : 'hidden'" 
+                [ngClass]="modoManualDisabled ? 'disabled-next-step' : 'next-step-wrapper'">
+              <a>Next Step</a>
+            </div>
+          </div>
+          <div class="run-container-wrapper" (click)="running ? killSortingProcess() : ''" >
+            <div [style.visibility]="running ? 'visible' : 'hidden'" class="run-wrapper">
+                <a>Stop</a>
+            </div>
+          </div>
+        </div>
+        <div class="timer" [style.visibility]="timerDesired ? 'visible' : 'hidden'">
+          <div [ngClass]="{'dot':'true', 'blink':running}"></div>
+          <a class="time-text">{{minutos}}:{{segundos}}:{{milisegundos}}</a>
+        </div>
+      </div>
+
+    </div>
+    
+    <app-config-panel (sizeChange)="triggerArrayUpdate($event)" 
+                      (runEvent)="runProgram($event)" 
+                      (explEvent)="displayExplanationModal()"
+                      (codeEvent)="displayCodeModal()"
+    class="config-container"></app-config-panel>
+  </div>
+</div>

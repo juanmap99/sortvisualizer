@@ -1,0 +1,29 @@
+$sdef$s $dmergeSort$d(arr):
+    $sif$s $flen$f(arr) > $u1$u:
+        mid = $flen$f(arr) // $u2$u
+        leftHalf = arr[:mid]
+        rightHalf = arr[mid:]
+        $d $d
+        mergeSort(leftHalf)
+        mergeSort(rightHalf)
+        $d $d
+        iLeft = iRight = iArr = $u0$u
+
+        $swhile$s iLeft < $flen$f(leftHalf) $sand$s iRight < $flen$f(rightHalf):
+            $sif$s leftHalf[iLeft] < rightHalf[iRight]:
+                arr[iArr] = leftHalf[iLeft]
+                iLeft += $u1$u
+            $selse$s:
+                arr[iArr] = rightHalf[iRight]
+                iRight += $u1$u
+            iArr += $u1$u
+        $d $d
+        $swhile$s iLeft < $flen$f(leftHalf):
+            arr[iArr] = leftHalf[iLeft]
+            iLeft += $u1$u
+            iArr += $u1$u
+        $d $d
+        $swhile$s iRight < $flen$f(rightHalf):
+            arr[iArr] = rightHalf[iRight]
+            iRight += $u1$u
+            iArr += $u1$u

@@ -1,0 +1,72 @@
+<div class="conf-body">
+    <div class="use-mode-conf">
+        <h2>Modo de ejecución</h2>
+        <form>
+            <mat-radio-group name="fuMan" (change)="recordInteraction($event)" class="modo-uso-gp">
+                <mat-radio-button class="modo" value="true">Manual</mat-radio-button>
+                <mat-radio-button class="modo" value="false">Automático</mat-radio-button>
+            </mat-radio-group>
+        </form>
+        <hr class="solid">
+    </div>
+
+    <div class="param-container">
+        <h2>Parámetros</h2>
+        <div>
+            <label [ngClass] = "{ 'disabledLabel': running, 'undisabledLabel': !running}">Tamaño array:</label>
+            <mat-slider class="mat-slide"
+                [disabled]="running"
+                thumbLabel
+                min="4"
+                max="100"
+                aria-label="units"
+                (input)="adjustArrSize($event)">
+            </mat-slider>
+        </div>
+        <div>
+            <label [ngClass] ="{'undisabledLabel': !(manual || running), 'disabledLabel': manual || running}">
+                Velocidad:
+            </label>
+            <mat-slider class="mat-slide"
+                thumbLabel
+                [disabled]="manual || running"
+                min="1"
+                max="5"
+                aria-label="units"
+                (change)="adjustSpeed($event)">
+            </mat-slider>
+        </div>
+        <div class="checkbox-wr">
+            <mat-checkbox
+                (change)="setTimerDesired($event)"
+                [disabled]="manual || running"
+                [labelPosition]="'before'">
+                <span [ngClass] ="{'undisabledLabel': !(manual || running), 'disabledLabel': manual || running}">Activar timer</span>
+            </mat-checkbox>
+        </div>
+        <hr class="solid">
+    </div>
+
+    <div class="run-container-wrapper" (click)="!running ? runProgram() : ''" >
+        <div [ngClass]="{'run-wrapper':!running, 'run-wrapper-disabled':running}">
+            <a>Run</a>
+        </div>
+    </div>
+
+    <div class="view-wrapper">
+        <div class="botton-wrapper explicacion-wrapper"
+             (click)="emitExplanationEvent()">
+            <a>Explicación</a>
+            <div class="icon">
+                <fa-icon [icon]="lbulbIcon"></fa-icon>
+            </div>
+        </div>
+        <div class="botton-wrapper"
+             (click)="emitCodeDisplayEvent()">
+            <a>Código</a>
+            <div class="icon">
+                <fa-icon [icon]="codeIcon"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>

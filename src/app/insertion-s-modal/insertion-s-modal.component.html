@@ -1,0 +1,67 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Introducción</h1>
+            <p>InsertionSort es un algoritmo que ordena el array de forma in-place bajo la misma dinámica
+                que se sigue en el caso que se intente ordenar un set de cartas presente en nuestras manos. Para ello
+                se recorre la totalidad del array y sobre cada iteración se compara el elemento actual contra sus antecesores
+                y, en caso de que este fuera de orden, el mismo es desplazado hacia la posición en la cual estaría ordenado.
+            </p>
+            <br>
+            <h1>Análisis complejidad temporal</h1>
+            <p>
+                La complejidad temporal es de <strong>O(n<sup>2</sup>)</strong> debido a que se recorre la totalidad
+                del array;lo que lleva un tiempo de O(n); y sobre cada iteración se recorren todos los elementos
+                previos al mismo lo que conlleva un tiempo promedio de O(n).
+            </p>
+            <br>
+            <h1>Análisis complejidad espacial</h1>
+            <p>
+                La complejidad espacial es constante debido a que solo se utiliza una variable auxiliar
+                que guarda el valor del elemento que estamos desplazando actualmente.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+             <h1>Procedimiento</h1>
+             <p>
+                El procedimiento es muy sencillo y puede ser resumido en los siguientes pasos:
+            </p>
+            <ul>
+                <li>Se recorre el array desde la posición 1
+                    (ya que el elemento 0 no puede ser desplazado mas de lo que se encuentra) hasta
+                    el valor marcado por la longitud del array.</li>
+                <li>Sobre cada iteración, se define una variable <strong>reverser</strong> que tome el valor del array en la posición establecida por la iteración actual</li>
+                <li>Se establece un índice J que comienza en la posición reverser-1.
+                </li>
+                <li>Siempre y cuando J sea mayor igual a 0 y el valor de nuestro reverser sea menor al valor
+                    del elemento en la posicion J, se remplaza el valor de array[j+1] por el de array[j] y se decrementa
+                    el valor de j en 1
+                </li>
+                <li>Una vez que se salga del ciclo surgen dos resultados posibles: J es igual a -1, o el valor del elemento sobre
+                    el cual se encuentra situado J es menor al de nuestro reverser y no debe ser desplazado. Independientemente del caso,
+                    el reverser es posicionado en la posición J+1</li>
+            </ul>
+        </div>
+    </div>
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

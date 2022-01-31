@@ -1,0 +1,9 @@
+.code-copied{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color:#FF7A18;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}

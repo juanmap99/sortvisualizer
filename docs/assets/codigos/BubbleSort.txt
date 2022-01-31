@@ -1,0 +1,12 @@
+$sdef$s $dbubbleSort$d(arr):
+    n = $flen$f(arr)
+    $sfor$s inOrder in $frange$f(n):
+        swapped = $sFalse$s
+        $sfor$s j in $frange$f($u0$u, n-inOrder-$u1$u):
+            $sif$s arr[j] > arr[j+$u1$u] :
+                swapped = $sTrue$s
+                temp = arr[j]
+                arr[j] = arr[j+$u1$u]
+                arr[j+$u1$u] = temp
+        $sif not$s swapped:
+            $sbreak$s

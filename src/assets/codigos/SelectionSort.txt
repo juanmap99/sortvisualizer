@@ -1,0 +1,11 @@
+$sdef$s $dselectionSort$d(arr):
+    $sfor$s i $sin$s $frange$f($flen$f(arr)):
+        min_idx = i
+        $sfor$s j $sin$s $frange$f(i + $u1$u, $flen$f(arr)):
+            $sif$s arr[min_idx] > arr[j]:
+                min_idx = j
+        $d $d
+        $sif$s min_idx != i:
+            temp = arr[i]
+            arr[i] = arr[min_idx]
+            arr[min_idx] = temp

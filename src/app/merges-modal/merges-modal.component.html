@@ -1,0 +1,84 @@
+<div class="modal-container">
+    <div class="icon">
+        <fa-icon (click)="closeModal()" [icon]="closeButton"></fa-icon>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 0">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+            <h1>Introducción</h1>
+            <p>Merge Sort al igual que el QuickSort funciona bajo la dinámica de que dividir es conquistar, lo que realiza a 
+                través de la división del array en dos mitades que luego se encarga de unir de manera ordenada
+                para garantizar el orden deseado.     
+            </p>
+            <p>
+                La diferencia mas grande con el QuickSort es que si bien ambos son algoritmos que ordenan 
+                <strong>in-place</strong>, el MergeSort cuenta con una complejidad espacial mucho mas grande
+                ya que hace uso de dos variables auxiliares de un tamaño que asumimos como <strong>O(N)</strong>(ya que si bien el tamaño maximo posible de 
+                las mismas es O(N/2) en Big O Notation se ignoran las constantes).
+            </p>
+            <br>
+            <h1>Análisis complejidad temporal</h1>
+            <p>
+                La complejidad temporal del MergeSort es de <strong>O(n Log<sub>2</sub>n)</strong> debido a que sobre cada llamada se divide
+                el array en dos mitades buscando siempre el punto medio;lo que lleva un tiempo de Log<sub>2</sub>n;
+                mientras que para el proceso de <strong>merging</strong> se recorren las dos mitades, lo cual conlleva un
+                tiempo O(N).
+            </p>
+            <br>
+            <h1>Análisis complejidad espacial</h1>
+            <p>
+                Debido a que nececitamos dos variables auxiliares para almacenar la mitad izquierda y la
+                mitad derecha, la complejidad espacial es <strong>O(N)</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="modal-content-wrapper" *ngIf="curModalTab == 1">
+        <div class="modal-content"
+             [style.height]="modalHeight-90 + 'px'"
+             [style.width]="modalWidth-40 + 'px'">
+             <h1>Procedimiento</h1>
+             <p>El procedimiento bajo el cual opera el MergeSort es el siguiente:</p>
+             <ul>
+                 <li>Se elige un punto medio tomando como base la longitud de la porción que se esta tratando actualmente.</li>
+                 <li>De existir un punto medio, se divide el array en una mitad izquierda y una mitad derecha
+                 </li>
+                 <li>Se llama a la funcion de manera recursiva otorgando la mitad izquierda, y la mitad derecha.</li>
+                 <li>A partir de este punto se cuenta con la certeza que tanto la mitad izquierda y derecha se encuentran ordenadas, debido
+                     a que las llamadas recursivas continuaran particionando el array, el cual una vez llege al punto en el que ya
+                     no puede ser divisible comenzará a ordenarse a traves del proceso de <strong>merging</strong> de las mitades
+                     que definió en base a la porcion del array que le llegó por parametro en la llamada recursiva.
+                 </li>
+                 <li>Se comienza con el proceso de merging. Para ello, se definen 3 indices, uno para recorrer la mitad izquierda(<strong>iLeft</strong>), otro para la mitad
+                derecha(<strong>iRight</strong>) y un último para el array(<strong>iArray</strong>)</li>
+                 <li>Se recorre la mitad izquierda y mitad derecha de manera paralela hasta que uno de los dos
+                     sea recorrido en su totalidad, y en cada paso:.</li>
+                 <ul>
+                     <li>Se compara mitadIzquierda[iLeft] contra mitadDerecha[iRight]. En caso que el primero sea menor al segundo, 
+                         array[iArray] pasa a tomar el valor de mitadIzquierda[iLeft] y iLeft incrementa su valor en uno. En caso
+                         contrario array[iArray] pasa a tomar el valor de mitadDerecha[iRight] y iRight incrementa su valor en uno
+                     </li>
+                     <li>Se incrementa el valor de iArray en uno.</li>
+                 </ul>
+                 <li>En este paso, se encuentra recorrido en su totalidad ya sea la mitad derecha o la mitad izquierda, sin embargo, la mitad
+                     que no pudo ser completada todavía cuenta con valores que deben ser ingresados en el array. Debido a que ese es el caso, se verifica
+                     cual de esas dos mitades no fue completada y se colocan los elementos en concordancia con su propio índice
+                     y el valor de iArray sobre el cual continuar.
+                 </li>
+             </ul>
+        </div>
+    </div>
+
+    <div class="lower-modal-section">
+        <div class="hline-wrap">
+            <div class="hline"></div>
+        </div>
+        <div class="interaction-wrapper">
+            <a class="back-button"[style.visibility]="curModalTab == 0 ? 'hidden' : 'visible'"
+            (click)="goPreviousPage()">&laquo; Previous</a>
+            <a class="next-button"[style.visibility]="curModalTab == 1 ? 'hidden' : 'visible'" (click)="goNextPage()">Next &raquo;</a>       
+        </div>
+    </div>
+</div>

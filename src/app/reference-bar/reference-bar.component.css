@@ -1,0 +1,90 @@
+.dot{
+    height: 40px;
+    width: 40px;
+    border-radius: 50% 50% 50% 50%;
+    margin-left: 10px;
+}
+
+.wrapper h1{
+    margin-left: 12px;
+    margin-top: 8px;
+}
+
+.reference-container{
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: flex-start;
+}
+
+.ref-el{
+    display: flex;
+    flex-direction: row;
+    align-content: baseline;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.ref-el:first-child{
+    margin-top: 4px;
+}
+
+.var-name{
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.descripcion{
+    font-size: 15px;
+    padding-left: 10px;
+    text-decoration: underline;
+    color: #0089c7;
+}
+.descripcion:hover{
+    color: #02547a;
+    cursor: pointer;
+}
+
+.ref-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.hline{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 90%;
+    opacity: 88%;
+    color: black;
+}
+
+.invisible{
+    visibility: hidden;
+}
+
+.visible{
+    visibility: visible;
+}
+
+.desc-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.desc-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    min-width: 200px;
+    max-width: 210px;
+}
+
+.desc-dis{
+    padding-top: 5px;
+    padding-left: 15px;
+}

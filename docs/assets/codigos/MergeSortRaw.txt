@@ -1,0 +1,29 @@
+def mergeSort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        leftHalf = arr[:mid]
+        rightHalf = arr[mid:]
+
+        mergeSort(leftHalf)
+        mergeSort(rightHalf)
+
+        iLeft = iRight = iArr = 0
+
+        while iLeft < len(leftHalf) and iRight < len(rightHalf):
+            if leftHalf[iLeft] < rightHalf[iRight]:
+                arr[iArr] = leftHalf[iLeft]
+                iLeft += 1
+            else:
+                arr[iArr] = rightHalf[iRight]
+                iRight += 1
+            iArr += 1
+
+        while iLeft < len(leftHalf):
+            arr[iArr] = leftHalf[iLeft]
+            iLeft += 1
+            iArr += 1
+
+        while iRight < len(rightHalf):
+            arr[iArr] = rightHalf[iRight]
+            iRight += 1
+            iArr += 1

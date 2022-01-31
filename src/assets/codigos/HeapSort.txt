@@ -1,0 +1,30 @@
+$sdef$s $dswap$d(arr$s,$s indexA$s,$s indexB):
+    temp = arr[indexA]
+    arr[indexA] = arr[indexB]
+    arr[indexB] = temp
+$d $d
+$sdef$s $dheapify$d(arr$s,$s nodes$s,$s i):
+    biggest = i
+    leftChild = ($u2$u * i) + $u1$u
+    rightChild = ($u2$u * i) + $u2$u
+    $d $d
+    $sif$s leftChild < nodes $sand$s arr[biggest] < arr[leftChild]:
+        biggest = leftChild
+    $d $d
+    $sif$s rightChild < nodes $sand$s arr[biggest] < arr[rightChild]:
+        biggest = rightChild
+    $d $d
+    $sif$s biggest != i:
+        swap(arr$s, $sbiggest$s, $s i)
+        heapify(arr$s,$s nodes$s,$s biggest)
+$d $d
+$sdef$s $dheapSort$d(arr):
+    nodes = $flen$f(arr)
+    iUntilHasChild = (nodes // $u2$u) - $u1$u
+    $d $d
+    $sfor$s i $sin$s $frange$f(iUntilHasChild, -$u1$u, -$u1$u):
+        heapify(arr$s,$s nodes$s,$s i)
+    $d $d
+    $sfor$s leftToOrder $sin$s $frange$f(nodes - $u1$u$s,$s $u0$u$s,$s -$u1$u):
+        swap(arr$s,$s leftToOrder$s, $s$u0$u)
+        heapify(arr$s,$s leftToOrder$s,$s $u0$u)
