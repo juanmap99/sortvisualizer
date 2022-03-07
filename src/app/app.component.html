@@ -1,4 +1,23 @@
-<div class="page-container" [style.min-width]="'1270px'" >
+<div class="modal-container" [style.width]="modalWidth+'px'" 
+[style.height]="modalHeight+'px'"
+[style.margin-top]="(scHeight -modalHeight)/2+'px'"
+[style.margin-bottom]="(scHeight -modalHeight)/2+'px'"
+[style.margin-left]="(scWidth -modalWidth)/2+'px'"
+[style.margin-right]="(scWidth -modalWidth)/2+'px'"
+[style.display]="openModal ? 'block' : 'none'"
+>
+<div #modalContainer></div>
+</div>
+<div class="modal-background" 
+[style.min-width]="'1270px'"
+[style.width]="scWidth+'px'" 
+[style.height]="getModalBackgroundHeight()+'px'"
+[style.display]="openModal ? 'block' : 'none'"
+(click)="closeModal()">
+</div>
+
+<div class="page-container" [style.min-width]="'1270px'" [style.height]="getModalBackgroundHeight()+'px'">
+
   <div [style.min-width]="'1270px'" class="toolbar modal-overlay">
     <div [ngClass]="algoritmoElegido=='QuickSort' ? 'tb-item-sel' : 'tb-item-def'" 
         (click)="setCurrentSortAlg('QuickSort')">
@@ -25,23 +44,7 @@
       <span>InsertionSort</span>
     </div>
   </div>
-  <div class="modal-container" [style.width]="modalWidth+'px'" 
-                              [style.height]="modalHeight+'px'"
-                              [style.margin-top]="(scHeight -modalHeight)/2+'px'"
-                              [style.margin-bottom]="(scHeight -modalHeight)/2+'px'"
-                              [style.margin-left]="(scWidth -modalWidth)/2+'px'"
-                              [style.margin-right]="(scWidth -modalWidth)/2+'px'"
-                              [style.display]="openModal ? 'block' : 'none'"
-                              >
-    <div #modalContainer></div>
-  </div>
-  <div class="modal-background" 
-       [style.min-width]="'1270px'"
-       [style.width]="scWidth+'px'" 
-       [style.height]="scHeight+'px'"
-       [style.display]="openModal ? 'block' : 'none'"
-       (click)="closeModal()">
-  </div>
+
   <div class="body-container modal-overlay" [style.min-width]="'1270px'" [style.height]="getBodyHeight()+'px'">
     <app-reference-bar class="reference-container"></app-reference-bar>
 

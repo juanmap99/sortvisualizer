@@ -125,6 +125,7 @@ export class AppComponent implements OnInit {
     this.runServ.setSortingAlgorithm(this.sortAlgInstance);
     //Segun el modo de uso corremos
     if(params.useMode == "automatic"){
+      this.timerDesired = false;
       this.modoManualOn = false;
       this.runServ.runAutomaticSorting();
       if(params.timerDesired){
@@ -245,7 +246,7 @@ export class AppComponent implements OnInit {
    */
   updateSizeDependantVar(){
     this.scWidth = window.innerWidth < 1270 ? 1270 : window.innerWidth;
-    this.scHeight = window.innerHeight < 800 ? 800 : window.innerHeight;
+    this.scHeight = window.innerHeight < 850 ? 850 : window.innerHeight;
     this.modalServ.calculateModalSize(this.scWidth,this.scHeight);
     this.modalWidth = this.modalServ.modalSize.modalWidth;
     this.modalHeight = this.modalServ.modalSize.modalHeight;
@@ -257,9 +258,18 @@ export class AppComponent implements OnInit {
    * @returns Altura de la seccion en donde se encontrara el cuerpo de la pagina. 
    */
   getBodyHeight(){
-    let height = this.scHeight - 75;//75px de la nav bar
+    let height = this.scHeight - 85;//75px de la nav bar
     return height < 850 ? 850 : height
   }
+
+  /**
+   * Devuelve la altura en pixeles de la lamina opaca en el background al abrir un modal
+   * @returns Altura del background de la pagina sobre ejecucion del modal. 
+   */
+   getModalBackgroundHeight(){
+    return this.getBodyHeight() + 85;
+  }
+
 
   /**
    * Retorna la longitud maxima posible que puede tomar el array restando el tamaño
