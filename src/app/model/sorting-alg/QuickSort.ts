@@ -52,6 +52,7 @@ export class QuickSort implements SortAlgorithm{
                     if(estado.estadoVariables[1].length > 0){
                         this.auxServ.setPriorityIndex("Stack", estado.estadoVariables[1].length-1);
                     }
+                    this.auxServ.setAuxVariable("Stack",estado.estadoVariables[1]);
                     estado.estadoVariables[2] = iPair.iLeft;
                     estado.estadoVariables[5] = iPair.iRight;
                     estado.estadoVariables[3] = iPair.iLeft;

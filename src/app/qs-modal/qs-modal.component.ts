@@ -23,7 +23,7 @@ export class QsModalComponent {
    * el display de la explicación del codigo como a su vez el display del codigo del algoritmo)
    */
   constructor(private modalServ: ModalService) { 
-    modalServ.modalSizeObs.subscribe((newSize)=> this.setNewSize(newSize));
+    this.modalServ.modalSizeObs.subscribe((newSize)=> this.setNewSize(newSize));
   }
 
   /**

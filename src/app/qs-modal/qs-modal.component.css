@@ -102,10 +102,16 @@
     flex-grow: 2;
 }
 
-p{
-    font-size: 15px;
+li{
+    font-size: 16px;
+    padding-right: 8px;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
-li{
-    font-size: 15px;
+p{
+    font-size: 16px;
+    padding-right: 8px;
+    text-align: justify;
+    text-justify: inter-word;
 }

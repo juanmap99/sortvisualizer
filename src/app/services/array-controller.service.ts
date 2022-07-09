@@ -8,6 +8,7 @@ import { Swapper } from '../model/Swapper';
 export class ArrayControllerService {
   size : number;
   arr : Array<[number,number]>;
+  genMode : string = "Random"
   arrObservable : BehaviorSubject<Array<[number,number]>>;
   lastSwap : Swapper = {'indexA':-1,'indexB':-1};
   swapObservable : BehaviorSubject<Swapper>;
@@ -61,14 +62,129 @@ export class ArrayControllerService {
     return arr;
   }
 
+  getNearlySortedArray(len : number){
+    let arr = new Array<[number,number]>();
+    let appearedMap = new Map<number,boolean>();//To avoid repeated values in array
+    let firstValue = this.randomIntFromInterval(1,len)
+    arr.push([0,firstValue]);
+    appearedMap.set(-1,true);
+    appearedMap.set(firstValue,true);
+    for (let i = 1; i < len; i++){
+      let val = -1;
+      while(appearedMap.get(val)){
+        val = this.randomIntFromInterval(arr[i-1][1],arr[i-1][1]+3);
+      }
+      appearedMap.set(val,true);
+      arr.push([i,val]);
+    }
+
+    let gap = 2;
+    let counter = 0;
+    for (let i = 0; i < len; i++){
+      if(counter == gap){
+        let temp = arr[i][1]
+        arr[i][1] = arr[i-2][1]
+        arr[i-2][1] = temp;
+        gap += 1;
+        counter = -1;
+      }
+      counter += 1
+    }
+    return arr;
+  }
+
+  getReversedArray(len : number){
+    let arr = new Array<[number,number]>();
+    let appearedMap = new Map<number,boolean>();//To avoid repeated values in array
+    let firstValue = this.randomIntFromInterval(len*2,len*3)
+    arr.push([0,firstValue]);
+    appearedMap.set(-1,true);
+    appearedMap.set(firstValue,true);
+    for (let i = 1; i < len; i++){
+      let val = -1;
+      while(appearedMap.get(val)){
+        val = this.randomIntFromInterval(arr[i-1][1]-2,arr[i-1][1]);
+      }
+      appearedMap.set(val,true);
+      arr.push([i,val]);
+    }
+    return arr;
+  }
+
+  getRepeatedValues(len : number): number{
+    if(len <= 8){
+      return 2;
+    }
+    if(len <= 15){
+      return 3;
+    }
+    if(len <= 28){
+      return 4;
+    }
+    if(len <= 40){
+      return 5;
+    }
+    if(len <= 60){
+      return 6;
+    }
+    if(len <= 80){
+      return 7;
+    }
+    return 10
+  }
+
+  getFewUniqueArray(len : number){
+    let arr = new Array<[number,number]>();
+    let appearedMap = new Map<number,boolean>();//To avoid repeated values in array
+    let i = 0;
+    let repeated = this.getRepeatedValues(len);
+    appearedMap.set(-1,true);
+    while(i < len){
+      let val = -1;
+      while(appearedMap.get(val)){
+        val = this.randomIntFromInterval(4,len*3);;
+      }
+      let counter = 0;
+      while(i < len && counter < repeated){
+        arr.push([i,val]);
+        i += 1;
+        counter += 1;
+      }
+      appearedMap.set(val,true);
+    }
+    return arr;
+  }
+
   /**
    * Genera un array random de tamaño newSize y llama a actualizar el observable.
    * 
    * @param newSize Entero que representa el nuevo tamaño deseado
    */
   updateArray(newSize: number){
-    this.arr = this.getRandomArray(newSize);
+    this.size = newSize;
+    this.arr = this.generateArray();
     this.eventChange();
+  }
+
+  updateGenMode(newMode : string){
+    this.genMode = newMode;
+    this.arr = this.generateArray();
+    this.eventChange();
+  }
+
+  generateArray(){
+    switch(this.genMode){
+      case("Random"):
+        return this.getRandomArray(this.size);
+      case("Nearly sorted"):
+        return this.getNearlySortedArray(this.size);
+      case("Reversed"):
+        return this.getReversedArray(this.size);
+      case("Few unique"):
+        return this.getFewUniqueArray(this.size);
+      default:
+        return this.getRandomArray(this.size)
+    }
   }
 
   /**

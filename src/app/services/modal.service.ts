@@ -105,4 +105,10 @@ export class ModalService {
     this.modalSize.modalHeight = height*0.70;
     this.modalSizeObs.next(this.modalSize);
   }
+
+  setModalSize(totalWidth:number,totalHeight:number){
+    this.modalSize.modalWidth = totalWidth*0.40;
+    this.modalSize.modalHeight = totalHeight*0.70;
+    this.modalSizeObs.next(this.modalSize);
+  }
 }

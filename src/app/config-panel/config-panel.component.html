@@ -12,6 +12,19 @@
 
     <div class="param-container">
         <h2>Parámetros</h2>
+        <div class="col mb-4">
+            <div class="select-field" appearance="fill">
+                <span [ngClass] = "{ 'disabledLabel': running, 'undisabledLabel': !running}" class="metodo-field">Modo generación: </span>
+                <select (change)="setMethod($event)" 
+                        class="select-input"
+                        [disabled]="running">
+                  <option value="Random" selected>Random</option>
+                  <option value="Nearly sorted">Nearly Sorted</option>
+                  <option value="Reversed">Reversed</option>
+                  <option value="Few unique">Few unique</option>
+                </select>
+            </div> 
+        </div>
         <div>
             <label [ngClass] = "{ 'disabledLabel': running, 'undisabledLabel': !running}">Tamaño array:</label>
             <mat-slider class="mat-slide"
@@ -36,6 +49,7 @@
                 (change)="adjustSpeed($event)">
             </mat-slider>
         </div>
+
         <div class="checkbox-wr">
             <mat-checkbox
                 (change)="setTimerDesired($event)"

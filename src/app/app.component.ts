@@ -17,6 +17,8 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { AuxiliarVariable, DisplayStatus } from './model/AuxiliarVariable';
 import { SelectionSort } from './model/sorting-alg/SelectionSort';
 import { InsertionSort } from './model/sorting-alg/InsertionSort';
+import { ContainerSizeService } from './services/container-size-service';
+import { Dimensions } from './model/Dimensions';
 
 
 @Component({
@@ -48,6 +50,9 @@ export class AppComponent implements OnInit {
   modoManualDisabled : boolean = false;
   auxVarList : AuxiliarVariable[] = [];
   threeDots  = faEllipsisH;
+  configDimension : Dimensions = {width:0, height:0};
+  execBodyDimension : Dimensions = {width:0, height:0};
+  referencesDimension : Dimensions = {width:0, height:0};
 
   /**
    * Constructor del app component.
@@ -68,7 +73,8 @@ export class AppComponent implements OnInit {
               private colRefServ: ReferenceService,
               private runServ: RunControllerService,
               private modalServ: ModalService,
-              private auxServ : AuxVarService){
+              private auxServ : AuxVarService,
+              private boxSizeServ: ContainerSizeService){
     this.running = false;
     this.algoritmoElegido = "QuickSort";
     this.sortAlgInstance = this.instanciateSortAlg(this.algoritmoElegido);
@@ -245,21 +251,46 @@ export class AppComponent implements OnInit {
    * por 800 pixeles de alto.
    */
   updateSizeDependantVar(){
+    /*
     this.scWidth = window.innerWidth < 1270 ? 1270 : window.innerWidth;
     this.scHeight = window.innerHeight < 850 ? 850 : window.innerHeight;
-    this.modalServ.calculateModalSize(this.scWidth,this.scHeight);
+    */
+   
+    this.scWidth = window.innerWidth;
+    this.scHeight = window.innerHeight;
+    
+    //this.modalServ.calculateModalSize(this.scWidth,this.scHeight);
+    this.boxSizeServ.calculateContainersSize(this.scWidth,this.scHeight);
+    this.configDimension = this.boxSizeServ.configDimension;
+    this.execBodyDimension = this.boxSizeServ.execBodyDimension;
+    this.referencesDimension = this.boxSizeServ.referencesDimension;
+    console.log("Config:" +  this.configDimension.width)
+    console.log("Body:" +  this.execBodyDimension.width)
+    console.log("Ref:" +  this.referencesDimension.width)
+    this.modalServ.setModalSize(this.getTotalWidth(), this.getModalBackgroundHeight())
+    console.log("Modal Width:" + this.getTotalWidth())
+    console.log("Modal Heigth:" + this.getModalBackgroundHeight())
     this.modalWidth = this.modalServ.modalSize.modalWidth;
     this.modalHeight = this.modalServ.modalSize.modalHeight;
   }
 
+
+  getTotalWidth(){
+    return this.configDimension.width+
+            this.execBodyDimension.width+
+            this.referencesDimension.width;
+  }
   /**
    * Devuelve la altura en pixeles del cuerpo de la pagina exceptuando la toolbar
    * que se encuentra por encima de ello.
    * @returns Altura de la seccion en donde se encontrara el cuerpo de la pagina. 
    */
   getBodyHeight(){
+    /*
     let height = this.scHeight - 85;//75px de la nav bar
     return height < 850 ? 850 : height
+    */
+   return this.execBodyDimension.height;
   }
 
   /**
@@ -271,14 +302,6 @@ export class AppComponent implements OnInit {
   }
 
 
-  /**
-   * Retorna la longitud maxima posible que puede tomar el array restando el tamaño
-   * maximo que ocupa la barra de configuracion y referencias
-   * @returns Retorna la longitud maxima posible que puede tomar el contenedor del array
-   */
-  getArrMaxWidth(){
-    return this.scWidth - 450;
-  }
 
   /**
    * Llama al servicio que maneja la ejecucion del programa indicandole que detenga la ejecucion
@@ -406,4 +429,8 @@ export class AppComponent implements OnInit {
     }
   }
   
+
+  changeGenerationmode(mode : string){
+    this.arrService.updateGenMode(mode);
+  }
 }

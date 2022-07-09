@@ -247,3 +247,20 @@
     color: grey;
     font-size: 15px;
 }
+
+.select-field{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.select-field span{
+    font-size: 18px;
+    width: 35%;
+}
+
+.select-input{
+    background-color: #F5F9F7;
+    border: solid;
+    border-color: #F5F9F7;
+    width: 40%;
+}

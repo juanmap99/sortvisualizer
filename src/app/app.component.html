@@ -1,24 +1,26 @@
-<div class="modal-container" [style.width]="modalWidth+'px'" 
+<div class="modal-container" [style.min-width]="modalWidth+'px'" 
 [style.height]="modalHeight+'px'"
-[style.margin-top]="(scHeight -modalHeight)/2+'px'"
-[style.margin-bottom]="(scHeight -modalHeight)/2+'px'"
-[style.margin-left]="(scWidth -modalWidth)/2+'px'"
-[style.margin-right]="(scWidth -modalWidth)/2+'px'"
+[style.margin-top]="(getModalBackgroundHeight() -modalHeight)/2+'px'"
+[style.margin-bottom]="(getModalBackgroundHeight() -modalHeight)/2+'px'"
+[style.margin-left]="(getTotalWidth() -modalWidth)/2+'px'"
+[style.margin-right]="(getTotalWidth() -modalWidth)/2+'px'"
 [style.display]="openModal ? 'block' : 'none'"
 >
-<div #modalContainer></div>
+  <div #modalContainer></div>
 </div>
 <div class="modal-background" 
-[style.min-width]="'1270px'"
-[style.width]="scWidth+'px'" 
+[style.min-width]="getTotalWidth()+'px'" 
 [style.height]="getModalBackgroundHeight()+'px'"
 [style.display]="openModal ? 'block' : 'none'"
 (click)="closeModal()">
 </div>
-
+<!--
 <div class="page-container" [style.min-width]="'1270px'" [style.height]="getModalBackgroundHeight()+'px'">
+-->
+<div class="page-container">
 
-  <div [style.min-width]="'1270px'" class="toolbar modal-overlay">
+  <div  class="toolbar modal-overlay"
+        [style.min-width]="getTotalWidth() + 'px'">
     <div [ngClass]="algoritmoElegido=='QuickSort' ? 'tb-item-sel' : 'tb-item-def'" 
         (click)="setCurrentSortAlg('QuickSort')">
       <span>QuickSort</span>
@@ -45,11 +47,23 @@
     </div>
   </div>
 
-  <div class="body-container modal-overlay" [style.min-width]="'1270px'" [style.height]="getBodyHeight()+'px'">
-    <app-reference-bar class="reference-container"></app-reference-bar>
+  <div class="body-container modal-overlay" 
+      [style.height]="getBodyHeight()+'px'">
+    
+    <app-reference-bar class="reference-container"
+    [style.min-width]="referencesDimension.width + 'px'"
+                        [style.height]="referencesDimension.height + 'px'">
+    </app-reference-bar>
 
-    <div class="array-section-container">
-      <app-array-display class="array-container"></app-array-display> 
+    <div class="array-section-container" 
+    [style.min-width]="execBodyDimension.width + 'px'">
+     
+      <app-array-display 
+      [style.min-width]="execBodyDimension.width + 'px'"
+          [style.height]="execBodyDimension.height + 'px'"
+          class="array-container">
+      </app-array-display>
+
       <div class="aux-displ-section" [style.display]="running ? 'block' : 'none'">
         <h2 *ngIf="auxVariableExist" class="var-name">Variables auxiliares</h2>
         <div class="aux-container" *ngFor="let auxVar of auxVarList;">
@@ -75,6 +89,7 @@
           </span>
         </div>
       </div>
+
       <div class="program-controller-section">
         <div class="controller-buttons-section">
           <div class="next-step-container-wrapper"
@@ -90,18 +105,23 @@
             </div>
           </div>
         </div>
+
         <div class="timer" [style.visibility]="timerDesired ? 'visible' : 'hidden'">
           <div [ngClass]="{'dot':'true', 'blink':running}"></div>
           <a class="time-text">{{minutos}}:{{segundos}}:{{milisegundos}}</a>
         </div>
-      </div>
 
+      </div>
     </div>
     
-    <app-config-panel (sizeChange)="triggerArrayUpdate($event)" 
+    <app-config-panel class="config-container"
+                      [style.min-width]="configDimension.width + 'px'"
+                      [style.height]="configDimension.height + 'px'"
+                      (sizeChange)="triggerArrayUpdate($event)" 
                       (runEvent)="runProgram($event)" 
                       (explEvent)="displayExplanationModal()"
                       (codeEvent)="displayCodeModal()"
-    class="config-container"></app-config-panel>
+                      (metGenEvent)="changeGenerationmode($event)"
+                      ></app-config-panel>
   </div>
 </div>

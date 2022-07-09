@@ -25,11 +25,12 @@ export class ConfigPanelComponent{
   arrSize : number;
   runSpeed: number;
   timerDesired : boolean = false;
+  metodoGeneracion : string = "Random";
   @Output() runEvent = new EventEmitter<RunParams>();
   @Output() sizeChange = new EventEmitter<number>();
   @Output() explEvent = new EventEmitter<string>();
   @Output() codeEvent = new EventEmitter<string>();
-  
+  @Output() metGenEvent = new EventEmitter<string>();
   userModeButtonActive: boolean = false;
   
   /**
@@ -131,5 +132,15 @@ export class ConfigPanelComponent{
     this.timerDesired = event.checked;
   }
 
-
+  /**
+   * Setea el metodo a ejecutar sobre el arbol.
+   * 
+   * @param elem Elemento que representa el evento de cambio en el select de metodo.
+   */
+   setMethod(elem: any ){
+    if(elem.target.value != this.metodoGeneracion){
+      this.metodoGeneracion = elem.target.value;
+      this.metGenEvent.emit(this.metodoGeneracion)
+    }
+  }
 }

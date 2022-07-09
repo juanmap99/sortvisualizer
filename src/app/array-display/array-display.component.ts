@@ -121,9 +121,10 @@ export class ArrayDisplayComponent implements OnInit {
     this.fontSize = 100;
     for(let i=0; i< this.array.length;i++){
       let optimalFont = Math.min(this.elWidth / 2 , this.calculateElemHeight(this.array[i][1]));
+      console.log("Optimal font: " + this.array[i][1] + " es:" + optimalFont)
       this.fontSize = optimalFont < this.fontSize ? optimalFont : this.fontSize;
     }
-    if (this.fontSize < 8){
+    if (this.fontSize < 9){
       this.fontSize = 0;//Si no queda muy chica y no se ve nada
     }
   }
@@ -160,6 +161,7 @@ export class ArrayDisplayComponent implements OnInit {
     this.elMaxHeight = this.containerHeight;
     this.elWidth = ((this.containerWidth- (5*this.array.length)) / this.array.length); //MargenesSep
     this.updateFontSize();
+    console.log("Font size:" + this.fontSize)
   }
 
 }
